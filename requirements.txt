@@ -6,6 +6,5 @@ streamlit==1.25.0
 streamlit-webrtc==0.45.0
 geopy==2.3.0
 pandas==2.0.3
-streamlit-js-eval==0.0.6
+streamlit-js-eval==0.1.4
 opencage==2.2.0
-
