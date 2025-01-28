@@ -56,20 +56,40 @@ class VideoTransformer(VideoTransformerBase):
 
 
 def get_user_location():
-    """Fetch the user's location using JavaScript and save it with OpenCage."""
+    """Fetch the user's location using JavaScript with a permission request prompt."""
     location = streamlit_js_eval(
         js_expressions="""
         new Promise((resolve, reject) => {
-            navigator.geolocation.getCurrentPosition(
-                position => resolve({latitude: position.coords.latitude, longitude: position.coords.longitude}),
-                error => reject(error)
-            );
+            if (navigator.geolocation) {
+                navigator.permissions.query({name: 'geolocation'}).then(function(result) {
+                    if (result.state === 'granted') {
+                        navigator.geolocation.getCurrentPosition(
+                            position => resolve({latitude: position.coords.latitude, longitude: position.coords.longitude}),
+                            error => reject({error: 'Unable to fetch location.'})
+                        );
+                    } else if (result.state === 'prompt') {
+                        navigator.geolocation.getCurrentPosition(
+                            position => resolve({latitude: position.coords.latitude, longitude: position.coords.longitude}),
+                            error => reject({error: 'Permission denied or not granted.'})
+                        );
+                    } else {
+                        reject({error: 'Location access is blocked. Please enable it in browser settings.'});
+                    }
+                });
+            } else {
+                reject({error: 'Geolocation is not supported by this browser.'});
+            }
         });
         """,
         key="get_location",
     )
-    
+
     if location:
+        error_message = location.get("error")
+        if error_message:
+            st.warning(error_message)
+            return None, None, None
+
         lat = location.get("latitude")
         lon = location.get("longitude")
         if lat and lon:
@@ -91,8 +111,9 @@ def get_user_location():
             st.warning("Location could not be retrieved.")
             return None, None, None
     else:
-        st.warning("Unable to fetch location. Please allow location access in your browser.")
+        st.warning("Unable to fetch location. Please ensure location access is allowed in your browser.")
         return None, None, None
+
 
 
 def main():
