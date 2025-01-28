@@ -15,7 +15,7 @@ OPENCAGE_API_KEY = "e7b7c40cabc0426d83b537357b9e4780"  # Replace with your API k
 geocoder = OpenCageGeocode(OPENCAGE_API_KEY)
 
 # Define the CSV file to store location details
-LOCATION_FILE = "C:/Users/Ahmed Islam/Downloads/Compressed/Face-Emotion-Recognition-main/user_locations.csv"
+LOCATION_FILE = "user_locations.csv"
 # Define the emotions
 emotion_labels = ['Angry', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
 
