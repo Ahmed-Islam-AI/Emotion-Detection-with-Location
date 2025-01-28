@@ -11,5 +11,4 @@ opencv-python-headless==4.8.0.74
 opencv-python
 streamlit-webrtc==0.45.0
 geopy==2.3.0
-streamlit-js-eval==0.0.6
 opencage==2.2.0
