@@ -109,7 +109,7 @@ def main():
         
          # Add an image on the home page
         st.image(
-            "C:/Users/Ahmed Islam/Downloads/Compressed/Face-Emotion-Recognition-main/Images Used/home image.png",  # image path
+            "./Images/home image.png",  # image path
             caption="Real-Time Emotion Detection in Action",
             use_column_width=True
         )
