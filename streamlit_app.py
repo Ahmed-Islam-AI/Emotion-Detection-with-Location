@@ -103,7 +103,7 @@ def main():
     if choice == "Home":
         st.write("""
             ## This app detects facial emotions in real-time using a pre-trained CNN model.
-            This Web App is Made by Ahmed Islam, Tahir Mushtaq, Mubashar Nisar & Shams ul Hadi
+            This Web App is Made by **Ahmed Islam**, **Tahir Mushtaq**, **Mubashar Nisar** & **Shams ul Hadi.**
             """
             )
         
